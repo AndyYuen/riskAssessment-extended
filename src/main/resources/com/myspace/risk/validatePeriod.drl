@@ -1,0 +1,38 @@
+package com.myspace.risk;
+
+import java.util.Date;
+import java.util.Calendar;
+
+function Date today() {
+    return Calendar.getInstance().getTime();
+}
+
+// note: there are to such rules because we demonstrated that we can use either DSL Guided rules or Decision table
+
+// validate period
+rule "outside period decision table" 
+    salience 100
+	agenda-group "demographic-assessment"
+	dialect "mvel"
+
+    when
+        $app: Applicant(! campaign.equals("None"))
+        $period: ValidPeriod(today().compareTo($period.startDate) < 0 || today().compareTo($period.endDate) > 0)
+    then
+        System.out.println("Rule fired: " + drools.getRule().getName());
+        $app.setCampaign( "None" );
+end
+
+// validate period
+rule "outside period dsl" 
+    salience 100
+	agenda-group "dsl-demographic-assessment"
+	dialect "mvel"
+
+    when
+        $app: Applicant(! campaign.equals("None"))
+        $period: ValidPeriod(today().compareTo($period.startDate) < 0 || today().compareTo($period.endDate) > 0)
+    then
+        System.out.println("Rule fired: " + drools.getRule().getName());
+        $app.setCampaign( "None" );
+end

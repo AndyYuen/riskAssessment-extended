@@ -1,0 +1,75 @@
+<scenario>
+  <name>validatePeriodTest1.scenario</name>
+  <maxRuleFirings>100000</maxRuleFirings>
+  <globals/>
+  <fixtures>
+    <fact-data>
+      <type>Applicant</type>
+      <fieldData>
+        <field-data>
+          <name>campaign</name>
+          <value>EasyCredit</value>
+          <nature>4</nature>
+        </field-data>
+      </fieldData>
+      <name>$app</name>
+      <isModify>false</isModify>
+    </fact-data>
+    <fact-data>
+      <type>ValidPeriod</type>
+      <fieldData>
+        <field-data>
+          <name>startDate</name>
+          <value>13-Mar-2019</value>
+          <nature>1</nature>
+        </field-data>
+        <field-data>
+          <name>endDate</name>
+          <value>30-Mar-2019</value>
+          <nature>1</nature>
+        </field-data>
+      </fieldData>
+      <name>$period</name>
+      <isModify>false</isModify>
+    </fact-data>
+    <org.drools.workbench.models.testscenarios.shared.ActivateRuleFlowGroup>
+      <name>demographic-assessment</name>
+    </org.drools.workbench.models.testscenarios.shared.ActivateRuleFlowGroup>
+    <execution-trace>
+      <executionTimeResult>132</executionTimeResult>
+      <numberOfRulesFired>2</numberOfRulesFired>
+    </execution-trace>
+    <expect-fact>
+      <fieldValues>
+        <expect-field>
+          <fieldName>campaign</fieldName>
+          <expected>None</expected>
+          <actualResult>EasyCredit</actualResult>
+          <successResult>true</successResult>
+          <explanation>[$app] field [campaign] was [None].</explanation>
+          <operator>==</operator>
+          <nature>1</nature>
+        </expect-field>
+      </fieldValues>
+      <name>$app</name>
+      <anonymous>false</anonymous>
+    </expect-fact>
+    <expect-rule>
+      <ruleName>outside period decision table</ruleName>
+      <explanation>Rule [outside period decision table] was activated 1 times.</explanation>
+      <expectedFire>true</expectedFire>
+      <successResult>true</successResult>
+      <actualResult>1</actualResult>
+    </expect-rule>
+  </fixtures>
+  <lastRunResult>2019-03-01 03:40:39.635 UTC</lastRunResult>
+  <rules/>
+  <inclusive>false</inclusive>
+  <packageName>com.myspace.risk</packageName>
+  <imports>
+    <imports/>
+  </imports>
+  <ksessions>
+    <string>myStatefulSession</string>
+  </ksessions>
+</scenario>
